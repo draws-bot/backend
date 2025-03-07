@@ -7,9 +7,9 @@ pipeline {
         disableConcurrentBuilds()
         ansiColor('xterm')
     }
-    parameters{
-        booleanParam(name: 'deploy', defaultValue: false, description: 'Toggle this value')
-    }
+  //  parameters{
+  //      booleanParam(name: 'deploy', defaultValue: false, description: 'Toggle this value')
+  //  } 
     environment{
         def appVersion = '' //variable declaration
         nexusUrl = '184.73.46.195:8081'
@@ -96,7 +96,7 @@ pipeline {
                         groupId: 'com.expense',
                         version: "${appVersion}",
                         repository: "backend",
-                        credentialsId: 'nexus-auth',
+                        credentialsId: 'nexus-auth',                 
                         artifacts: [
                             [artifactId: "backend" ,
                             classifier: '',
