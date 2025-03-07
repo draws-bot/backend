@@ -12,9 +12,9 @@ pipeline {
     }
     environment{
         def appVersion = '' //variable declaration
-        nexusUrl = 'nexus.daws78s.online:8081'
+        nexusUrl = '184.73.46.195:8081'
         region = "us-east-1"
-        account_id = "315069654700"
+        account_id = "650732254329"
     }
     stages {
         stage('read the version'){
@@ -43,7 +43,7 @@ pipeline {
                 """
             }
         }
-        stage('Docker build'){
+       /* stage('Docker build'){
             steps{
                 sh """
                     aws ecr get-login-password --region ${region} | docker login --username AWS --password-stdin ${account_id}.dkr.ecr.${region}.amazonaws.com
