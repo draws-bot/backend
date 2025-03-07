@@ -29,7 +29,7 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                sh """
-                npm install
+               sudo npm install
                 ls -ltr
                 echo "application version: $appVersion"
                """
