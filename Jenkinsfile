@@ -108,24 +108,19 @@ pipeline {
             }
         } 
 
-        /* deploy means after backend it will goes to backend-deploy 
+            // deploy means after backend it will goes to backend-deploy 
 
 
-        /* stage('Deploy'){
-            when{
-                expression{
-                    params.deploy
-                }
+         stage('Deploy'){
+         //   when{
+         //       expression{
+         //           params.deploy
+         //       }
+         //   }
+            steps {
+                sh 'echo this is deploy'
             }
-            steps{
-                script{
-                    def params = [
-                        string(name: 'appVersion', value: "${appVersion}")
-                    ]
-                    build job: 'backend-deploy', parameters: params, wait: false
-                }
-            }
-        } */
+        } 
     }
     post { 
         always { 
