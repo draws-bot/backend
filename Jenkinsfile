@@ -7,9 +7,9 @@ pipeline {
         disableConcurrentBuilds()
         ansiColor('xterm')
     }
-  //  parameters{
-  //      booleanParam(name: 'deploy', defaultValue: false, description: 'Toggle this value')
-  //  } 
+    parameters{
+        booleanParam(name: 'deploy', defaultValue: false, description: 'Toggle this value')
+    }
     environment{
         def appVersion = '' //variable declaration
         nexusUrl = '52.55.140.196:8081'
@@ -34,7 +34,7 @@ pipeline {
                 echo "application version: $appVersion"
                """
             }
-        }  
+        }
         stage('Build'){
             steps{
                 sh """
@@ -43,7 +43,7 @@ pipeline {
                 """
             }
         }
-       /* stage('Docker build'){
+        /* stage('Docker build'){
             steps{
                 sh """
                     aws ecr get-login-password --region ${region} | docker login --username AWS --password-stdin ${account_id}.dkr.ecr.${region}.amazonaws.com
@@ -53,17 +53,18 @@ pipeline {
                     docker push ${account_id}.dkr.ecr.${region}.amazonaws.com/expense-backend:${appVersion}
                 """
             }
-        }
+        } 
 
         stage('Deploy'){
             steps{
                 sh """
+                    aws eks update-kubeconfig --region us-east-1 --name expense-dev
                     cd helm
                     sed -i 's/IMAGE_VERSION/${appVersion}/g' values.yaml
                     helm upgrade backend .
                 """
             }
-        }
+        } /*
         
         /* stage('Sonar Scan'){
             environment {
@@ -96,7 +97,7 @@ pipeline {
                         groupId: 'com.expense',
                         version: "${appVersion}",
                         repository: "backend",
-                        credentialsId: 'nexus-auth',                 
+                        credentialsId: 'nexus-auth',
                         artifacts: [
                             [artifactId: "backend" ,
                             classifier: '',
@@ -106,23 +107,8 @@ pipeline {
                     )
                 }
             }
-        } 
-
-            // deploy means after backend it will goes to backend-deploy 
-
-
-    /*     stage('Deploy'){
-         //   when{
-         //       expression{
-         //           params.deploy
-         //       }
-         //   }
-            steps {
-                sh 'echo this is deploy'
-            }
-        } 
-    }  */
-            /* stage('Deploy'){
+        } */
+        /* stage('Deploy'){
             when{
                 expression{
                     params.deploy
@@ -137,10 +123,11 @@ pipeline {
                 }
             }
         } */
+    }
     post { 
         always { 
             echo 'I will always say Hello again!'
-           deleteDir()
+            deleteDir()
         }
         success { 
             echo 'I will run when pipeline is success'
