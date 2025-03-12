@@ -12,7 +12,7 @@ pipeline {
   //  } 
     environment{
         def appVersion = '' //variable declaration
-        nexusUrl = '13.217.59.210:8081'
+        nexusUrl = '52.55.140.196:8081'
         region = "us-east-1"
         account_id = "650732254329"
     }
@@ -111,7 +111,7 @@ pipeline {
             // deploy means after backend it will goes to backend-deploy 
 
 
-         stage('Deploy'){
+    /*     stage('Deploy'){
          //   when{
          //       expression{
          //           params.deploy
@@ -121,7 +121,22 @@ pipeline {
                 sh 'echo this is deploy'
             }
         } 
-    }
+    }  */
+            /* stage('Deploy'){
+            when{
+                expression{
+                    params.deploy
+                }
+            }
+            steps{
+                script{
+                    def params = [
+                        string(name: 'appVersion', value: "${appVersion}")
+                    ]
+                    build job: 'backend-deploy', parameters: params, wait: false
+                }
+            }
+        } */
     post { 
         always { 
             echo 'I will always say Hello again!'
