@@ -12,7 +12,7 @@ pipeline {
     }
     environment{
         def appVersion = '' //variable declaration
-        nexusUrl = '52.55.140.196:8081'
+        nexusUrl = '34.204.94.251:8081'
         region = "us-east-1"
         account_id = "650732254329"
     }
@@ -45,18 +45,18 @@ pipeline {
         }
 
         
-         stage('Sonar Scan'){
+        /* stage('Sonar Scan'){
             environment {
                 scannerHome = tool 'sonar-6.0' //referring scanner CLI
             }
             steps {
                 script {
-                    withSonarQubeEnv('sonar-6.0') { //referring sonar server
+                    withSonarQubeEnv('sonar-6.0') { //referring sonar server at manage-jenkins/systems 
                         sh "${scannerHome}/bin/sonar-scanner"
                     }
                 }
             }
-        }
+        } */
 
         stage('Nexus Artifact Upload'){
             steps{
