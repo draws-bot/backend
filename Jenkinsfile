@@ -12,7 +12,7 @@ pipeline {
     }
     environment{
         def appVersion = '' //variable declaration
-        nexusUrl = '54.85.71.212:8081'
+        nexusUrl = '35.175.238.46:8081'
         region = "us-east-1"
         account_id = "650732254329"
     }
@@ -83,7 +83,7 @@ pipeline {
             steps {
                 sh 'echo this is deploy'
             }
-        }
+        } 
         /* stage('Deploy'){
             when{
                 expression{
@@ -103,7 +103,7 @@ pipeline {
     post { 
         always { 
             echo 'I will always say Hello again!'
-            //deleteDir()
+           // deleteDir()
         }
         success { 
             echo 'I will run when pipeline is success'
